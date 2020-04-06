@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Регистрация - подтверждение e-mail";
+}
+
+<style scoped>
+    .register-confirm {
+        width: 100%;
+        max-width: 420px;
+        padding: 15px;
+        margin: auto;
+    }
+</style>
+
+<h4 class="card-title mt-3 text-center">@ViewData["Title"]</h4>
+<div class="register-confirm text-center">
+    <p class="lead text-primary">Для завершения регистрации подтвердите свой e-mail.</p>
+    <p class="lead text-info">Для этого проверьте свою электронную почту и перейдите по ссылке, указанной в письме</p>
+
+    <p class="text-center">Уже подвердили? @Html.ActionLink("Войти", "Login", "Account")</p>
+</div>

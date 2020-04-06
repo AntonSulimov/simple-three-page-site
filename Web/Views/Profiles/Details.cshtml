@@ -1,0 +1,128 @@
+﻿@model Web.ViewModels.Profiles.ProfileViewModel
+
+@{
+    ViewData["Title"] = "Профиль " + Model.FullName;
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+    <div class="row my-2">
+        <div class="col-md-4 text-center" style="width:150px; height:150px;">
+            @if (Model.Avatar != null)
+            {
+                <img class="mx-auto img-fluid img-circle d-block" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))" />
+            }
+            else
+            {
+                <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            }
+        </div>
+        <div class="col-md-8">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Профиль</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Редактирование</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3">Пользовательский профиль</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Обо мне</h6>
+                            <p>
+                                @Model.AboutMe
+                            </p>
+                            <h6>Дата рождения</h6>
+                            <p>
+                                @Model.BirthDate.ToString("MM/dd/yyyy")
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Контакты</h6>
+                            <div class="find-widget">
+                                Тел.:  @Model.Phone
+                            </div>
+                            <div class="find-widget">
+                                Адрес: @Model.Address
+                            </div>
+                            <div class="find-widget">
+                                Сайт:  <a href="@Model.Site">@Model.Site</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="edit">
+                    <form method="post" role="form" asp-action="Edit" asp-controller="Profiles" enctype="multipart/form-data">
+                        <h6>Личная информация</h6>
+                        <div class="form-group row">
+                            <label asp-for="LastName" class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input asp-for="LastName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="FirstName" class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input asp-for="FirstName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="BirthDate" class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input asp-for="BirthDate" class="form-control" type="date">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="ProfilePicture" class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input asp-for="ProfilePicture" accept=".jpg, .jpeg, .png" class="btn btn-secondary">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="AboutMe" class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <textarea asp-for="AboutMe" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <h6>Контакты</h6>
+                        <div class="form-group row">
+                            <label asp-for="Phone" class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input asp-for="Phone" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Address" class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input asp-for="Address" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Site" class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input asp-for="Site" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input type="reset" class="btn btn-secondary" value="Сбросить изменения">
+                                <input type="submit" class="btn btn-primary" value="Сохранить">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

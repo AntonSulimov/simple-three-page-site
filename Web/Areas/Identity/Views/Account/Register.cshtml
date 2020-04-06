@@ -1,0 +1,42 @@
+﻿@model Web.Areas.Identity.ViewModels.Account.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<style scoped>
+    .form-register {
+        width: 100%;
+        max-width: 420px;
+        padding: 15px;
+        margin: auto;
+    }
+</style>
+
+<h4 class="card-title mt-3 text-center">@ViewData["Title"]</h4>
+<form method="post" class="form-register" asp-controller="Account" asp-action="Register">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+        </div>
+        <input asp-for="Email" class="form-control" placeholder="E-mail" type="email" required>
+    </div>
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+        </div>
+        <input asp-for="Password" class="form-control" placeholder="Придумайте пароль" type="password" required>
+    </div>
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+        </div>
+        <input asp-for="PasswordConfirm" class="form-control" placeholder="Повторите пароль" type="password" required>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">Создать аккаунт</button>
+    </div>
+    <p class="text-center">Уже зарегистрированы? @Html.ActionLink("Войти", "Login", "Account")</p>
+</form>
+

@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Data.Entities
+
+@model Web.Areas.Identity.ViewModels.Account.LoginViewModel
+
+@inject SignInManager<User> SignInManager
+
+@{
+    ViewData["Title"] = "Вход";
+}
+
+<h2 class="card-title mt-3">@ViewData["Title"]</h2>
+<div class="row">
+    <section class="col-md-5">
+        <h4>Используйте локальный аккаунт</h4>
+        <form class="form-signin" method="post" asp-controller="Account" asp-action="Login">
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                </div>
+                <input asp-for="Email" class="form-control" placeholder="E-mail" type="email" required autofocus>
+            </div>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                </div>
+                <input asp-for="Password" class="form-control" placeholder="Пароль" type="password" required>
+            </div>
+            <div class="checkbox mb-3 text-center">
+                <input asp-for="RememberMe" />
+                <label asp-for="RememberMe"></label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+            <br />
+            <p class="text-center">Забыли пароль? @Html.ActionLink("Восстановить", "ForgotPassword", "Account")</p>
+        </form>
+    </section>
+    <section class="col-md-5 offset-md-2">
+        <h4>Или войдите через внешний сервис</h4>
+        <hr />
+        @{
+            var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            
+            <form asp-action="ExternalLogin" method="post" class="form-horizontal">
+                <div>
+                    <p>
+                        @foreach (var provider in loginProviders)
+                        {
+                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Войти используя аккаунт @provider.DisplayName">@provider.Name</button>
+                        }
+                    </p>
+                </div>
+            </form>
+        }
+    </section>
+</div>
