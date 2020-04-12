@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services;
-using Services.Emplamentations;
+using Services.Implamentations;
 using Services.SettingsEntities;
 
 namespace Web

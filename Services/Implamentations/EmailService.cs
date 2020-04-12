@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Services.SettingsEntities;
 
-namespace Services.Emplamentations
+namespace Services.Implamentations
 {
     public class EmailService : IEmailService
     {
