@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Data;
 using Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ using Web.ViewModels.Profiles;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class ProfilesController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -55,6 +57,7 @@ namespace Web.Controllers
             return View(vm);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Edit(ProfileViewModel vm)
         {
             if(ModelState.IsValid)

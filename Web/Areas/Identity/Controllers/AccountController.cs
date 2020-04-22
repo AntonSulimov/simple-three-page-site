@@ -10,6 +10,7 @@ using Web.Areas.Identity.ViewModels.Account;
 
 namespace Web.Areas.Identity.Controllers
 {
+    [Authorize]
     [Area("Identity")]
     public class AccountController : Controller
     {
@@ -155,12 +156,14 @@ namespace Web.Areas.Identity.Controllers
 
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View(new RegisterViewModel());
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel vm)
         {
             if (!ModelState.IsValid)
@@ -304,6 +307,7 @@ namespace Web.Areas.Identity.Controllers
                 return View(vm);
             }
         }
+
 
 
         private void AddErrors(IdentityResult result)
